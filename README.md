@@ -1,52 +1,153 @@
-# Claude Code Config Sync
+# Claude Code 跨设备同步
 
-Cross-device sync for Claude Code configuration: skills, settings, memory, plugins.
+一套 GitHub 私有仓库实现 Claude Code 全配置（技能、设置、记忆、插件）多设备同步。
 
-## Quick Start
+## 工作原理
 
-### New device (first time)
+```
+设备 A ──push.ps1──→ GitHub 私有仓库 ←──git pull── 设备 B
+设备 B ──push.ps1──→ GitHub 私有仓库 ←──git pull── 设备 A
+```
+
+每台电脑都推同一份配置到同一个仓库，其他设备拉下来就是最新的。不会产生重复文件，不会冲突——跟多人协作写代码完全一样。
+
+---
+
+## 场景一：新电脑首次部署
+
+在新电脑上打开 PowerShell，一步一步执行：
+
+### 1. 确保已安装 Git 和 Claude Code
+
 ```powershell
-git clone git@github.com:<user>/claude-config-sync.git $env:USERPROFILE\.claude-config-sync
-cd $env:USERPROFILE\.claude-config-sync
+git --version       # 没有就去 https://git-scm.com 下载
+claude --version    # Claude Code 需先装好
+```
+
+### 2. 克隆同步仓库
+
+```powershell
+git clone https://github.com/Dongpadua/claude-config-sync.git "$env:USERPROFILE\.claude-config-sync"
+```
+
+如果提示登录，输入 GitHub 账号 `Dongpadua` 和密码/token。
+
+### 3. 一键部署
+
+```powershell
+cd "$env:USERPROFILE\.claude-config-sync"
 .\setup.ps1
 ```
 
-### Push changes (from any device)
+脚本会依次询问：
+
+```
+DeepSeek/Anthropic API key:  ← 必填，粘贴你的 key
+Gemini API key:              ← 可选，没有直接回车
+Kimi API key:                ← 可选，没有直接回车
+```
+
+然后自动完成：
+- 写入 settings.json（含你的 key）
+- 复制 CLAUDE.md 全局指令
+- 部署全部 53 个技能
+- 恢复所有记忆文件
+- 安装插件
+
+### 4. 重启 Claude Code
+
+关掉重开，一切就绪。
+
+---
+
+## 场景二：日常推送（改完配置后上传）
+
+**在任何一台电脑上**，改完技能、设置、记忆文件后：
+
 ```powershell
-cd $env:USERPROFILE\.claude-config-sync
+cd "$env:USERPROFILE\.claude-config-sync"
 .\push.ps1
 ```
 
-### Pull changes (update existing device)
+脚本自动做 8 件事：
+1. 拉取远端最新（防止冲突）
+2. 复制 CLAUDE.md + config.json
+3. 脱敏 settings.json（API key 替换为占位符）
+4. 同步所有技能目录
+5. 同步记忆文件
+6. 复制插件注册表 + connect + 脚本
+7. `git commit`
+8. `git push`
+
+**输出绿色 "Pushed successfully" 就完成了。**
+
+> 记不住路径？把这行加到 PowerShell 配置文件里，以后敲 `sync` 就行：
+> ```powershell
+> # 在 PowerShell 里运行：notepad $PROFILE
+> # 粘贴下面这行，保存：
+> function sync-claude { Push-Location "$env:USERPROFILE\.claude-config-sync"; .\push.ps1; Pop-Location }
+> ```
+> 以后直接敲 `sync-claude` 即可推送。
+
+---
+
+## 场景三：其他设备拉取更新
+
+当 A 电脑推送后，B 电脑想同步最新配置：
+
 ```powershell
-cd $env:USERPROFILE\.claude-config-sync
+cd "$env:USERPROFILE\.claude-config-sync"
 git pull
 .\sync-down.ps1
 ```
 
-## What's Synced
+`syc-down.ps1` 只更新文件，**不会覆盖你的 API key**（它自动保留本地的 key，只更新其他配置）。更新完重启 Claude Code。
 
-| What | Path |
+---
+
+## 同步内容清单
+
+| ✅ 同步 | ❌ 不同步 |
+|---------|----------|
+| 53 个技能 | API 密钥（自动脱敏） |
+| CLAUDE.md 全局指令 | 插件缓存（几百MB，可重新下载） |
+| settings.json（脱敏版） | 会话记录 |
+| 跨会话记忆文件（6个） | 设备专属设置（settings.local.json） |
+| 插件注册表 | 备份/遥测/文件历史 |
+| connect/composio 配置 | 技能内的 .git 目录 |
+| 自定义脚本 | |
+
+---
+
+## 安全机制
+
+三层防护确保密钥不泄露：
+
+1. **`.gitignore`** — `settings.json` 和 `settings.local.json` 永远不会被 git 追踪
+2. **模板替换** — `push.ps1` 提交的是 `settings.template.json`，里面 key 都是 `YOUR_XXX_HERE`
+3. **交互式输入** — `setup.ps1` 在新设备上现场要 key，不存到仓库里
+
+---
+
+## 快速参考
+
+| 操作 | 命令 |
 |------|------|
-| Skills (51) | `skills/` |
-| Global instructions | `CLAUDE.md` |
-| Settings template | `settings.template.json` |
-| Cross-session memory | `memory/` |
-| Plugin registry | `plugins/installed_plugins.json` |
-| Connect skills | `connect/`, `connect-apps/` |
-| Custom scripts | `scripts/` |
+| **新电脑初始化** | `git clone ...` → `cd ~/.claude-config-sync` → `.\setup.ps1` |
+| **推送更新** | `cd ~/.claude-config-sync` → `.\push.ps1` |
+| **拉取更新** | `cd ~/.claude-config-sync` → `git pull` → `.\sync-down.ps1` |
+| **查看变更历史** | `cd ~/.claude-config-sync` → `git log --oneline -10` |
+| **回滚到某次推送** | `cd ~/.claude-config-sync` → `git log` 找 commit → `git checkout <commit> -- .` → `.\sync-down.ps1` |
 
-## What's NOT Synced
+---
 
-- API keys (stripped from settings, stored as placeholders)
-- Plugin caches and marketplaces (reclonable)
-- Session transcripts and telemetry
-- Device-specific overrides (`settings.local.json`)
-- Nested `.git/` directories in skills
+## 常见问题
 
-## Security
+**Q: 两台电脑同时改了同一个文件怎么办？**
+A: `push.ps1` 第一步就是 `git pull`，如果没有冲突自动合并；有冲突会提示你手动解决。
 
-- `settings.json` and `settings.local.json` are in `.gitignore`
-- `settings.template.json` has `YOUR_XXX_HERE` placeholders
-- `setup.ps1` asks for real keys interactively
-- `push.ps1` automatically strips keys before commit
+**Q: 新电脑上符号链接技能（co-design 等）怎么办？**
+A: `setup.ps1` 会检查目标是否存在，存在则创建符号链接，不存在则创建 `.missing` 提示文件。
+
+**Q: 能不能自动定时推送？**
+A: 可以。在 Claude Code 里说 "每天自动推送一次"，即可设置 Cron 定时任务。
