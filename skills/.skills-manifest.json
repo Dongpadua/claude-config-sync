@@ -1,0 +1,17 @@
+{
+  "skills": {
+    "code-simplifier": {
+      "version": "1.1.0",
+      "installedAt": "2026-06-11T15:32:20.090Z",
+      "package": "@adonis0123/code-simplifier",
+      "path": "C:\\Users\\Administrator\\.claude\\skills\\code-simplifier",
+      "target": "claude-code",
+      "source": "anthropics/claude-plugins-official/plugins/code-simplifier"
+    }
+  },
+  "remoteCache": {
+    "anthropics/claude-plugins-official/plugins/code-simplifier": {
+      "lastCheckedAt": "2026-06-11T15:37:31.030Z"
+    }
+  }
+}

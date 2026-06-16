@@ -1,0 +1,257 @@
+﻿{
+    "env":  {
+                "ANTHROPIC_AUTH_TOKEN":  "YOUR_ANTHROPIC_KEY_HERE",
+                "ANTHROPIC_BASE_URL":  "https://api.deepseek.com/anthropic",
+                "ANTHROPIC_DEFAULT_HAIKU_MODEL":  "deepseek-v4-flash",
+                "ANTHROPIC_DEFAULT_OPUS_MODEL":  "deepseek-v4-pro",
+                "ANTHROPIC_DEFAULT_SONNET_MODEL":  "deepseek-v4-flash",
+                "ANTHROPIC_MODEL":  "deepseek-v4-pro",
+                "GEMINI_KEY":  "YOUR_GEMINI_KEY_HERE",
+                "KIMI_KEY":  "YOUR_KIMI_KEY_HERE"
+            },
+    "permissions":  {
+                        "allow":  [
+                                      "PowerShell(*)",
+                                      "Bash(*)",
+                                      "Read(*)",
+                                      "Write(*)",
+                                      "Edit(*)",
+                                      "Glob(*)",
+                                      "Grep(*)",
+                                      "WebSearch(*)",
+                                      "WebFetch(*)",
+                                      "Skill(*)",
+                                      "Agent(*)",
+                                      "TodoWrite(*)",
+                                      "TaskOutput(*)",
+                                      "TaskStop(*)",
+                                      "AskUserQuestion(*)",
+                                      "EnterPlanMode(*)",
+                                      "ExitPlanMode(*)",
+                                      "NotebookEdit(*)",
+                                      "DesignSync(*)",
+                                      "CronCreate(*)",
+                                      "CronDelete(*)",
+                                      "CronList(*)",
+                                      "Monitor(*)",
+                                      "ScheduleWakeup(*)",
+                                      "PushNotification(*)",
+                                      "EnterWorktree(*)",
+                                      "ExitWorktree(*)",
+                                      "Workflow(*)"
+                                  ]
+                    },
+    "hooks":  {
+                  "Elicitation":  [
+                                      {
+                                          "matcher":  "",
+                                          "hooks":  [
+                                                        {
+                                                            "type":  "command",
+                                                            "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" Elicitation",
+                                                            "shell":  "powershell",
+                                                            "timeout":  5,
+                                                            "async":  true
+                                                        }
+                                                    ]
+                                      }
+                                  ],
+                  "Notification":  [
+                                       {
+                                           "matcher":  "",
+                                           "hooks":  [
+                                                         {
+                                                             "type":  "command",
+                                                             "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" Notification",
+                                                             "shell":  "powershell",
+                                                             "timeout":  5,
+                                                             "async":  true
+                                                         }
+                                                     ]
+                                       }
+                                   ],
+                  "PermissionRequest":  [
+                                            {
+                                                "matcher":  "",
+                                                "hooks":  [
+                                                              {
+                                                                  "type":  "http",
+                                                                  "url":  "http://127.0.0.1:23333/permission",
+                                                                  "async":  true,
+                                                                  "timeout":  3
+                                                              }
+                                                          ]
+                                            }
+                                        ],
+                  "PostCompact":  [
+                                      {
+                                          "matcher":  "",
+                                          "hooks":  [
+                                                        {
+                                                            "type":  "command",
+                                                            "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" PostCompact",
+                                                            "shell":  "powershell",
+                                                            "timeout":  5,
+                                                            "async":  true
+                                                        }
+                                                    ]
+                                      }
+                                  ],
+                  "PostToolUse":  [
+                                      {
+                                          "matcher":  "",
+                                          "hooks":  [
+                                                        {
+                                                            "type":  "command",
+                                                            "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" PostToolUse",
+                                                            "shell":  "powershell",
+                                                            "timeout":  5,
+                                                            "async":  true
+                                                        }
+                                                    ]
+                                      }
+                                  ],
+                  "PostToolUseFailure":  [
+                                             {
+                                                 "matcher":  "",
+                                                 "hooks":  [
+                                                               {
+                                                                   "type":  "command",
+                                                                   "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" PostToolUseFailure",
+                                                                   "shell":  "powershell",
+                                                                   "timeout":  5,
+                                                                   "async":  true
+                                                               }
+                                                           ]
+                                             }
+                                         ],
+                  "PreCompact":  [
+                                     {
+                                         "matcher":  "",
+                                         "hooks":  [
+                                                       {
+                                                           "type":  "command",
+                                                           "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" PreCompact",
+                                                           "shell":  "powershell",
+                                                           "timeout":  5,
+                                                           "async":  true
+                                                       }
+                                                   ]
+                                     }
+                                 ],
+                  "PreToolUse":  [
+                                     {
+                                         "matcher":  "",
+                                         "hooks":  [
+                                                       {
+                                                           "type":  "command",
+                                                           "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" PreToolUse",
+                                                           "shell":  "powershell",
+                                                           "timeout":  5,
+                                                           "async":  true
+                                                       }
+                                                   ]
+                                     }
+                                 ],
+                  "SessionEnd":  [
+                                     {
+                                         "matcher":  "",
+                                         "hooks":  [
+                                                       {
+                                                           "type":  "command",
+                                                           "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" SessionEnd",
+                                                           "shell":  "powershell",
+                                                           "timeout":  5,
+                                                           "async":  true
+                                                       }
+                                                   ]
+                                     }
+                                 ],
+                  "SessionStart":  [
+                                       {
+                                           "matcher":  "",
+                                           "hooks":  [
+                                                         {
+                                                             "type":  "command",
+                                                             "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" SessionStart",
+                                                             "shell":  "powershell",
+                                                             "timeout":  5,
+                                                             "async":  true
+                                                         }
+                                                     ]
+                                       }
+                                   ],
+                  "Stop":  [
+                               {
+                                   "matcher":  "",
+                                   "hooks":  [
+                                                 {
+                                                     "type":  "command",
+                                                     "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" Stop",
+                                                     "shell":  "powershell",
+                                                     "timeout":  5,
+                                                     "async":  true
+                                                 }
+                                             ]
+                               }
+                           ],
+                  "StopFailure":  [
+                                      {
+                                          "matcher":  "",
+                                          "hooks":  [
+                                                        {
+                                                            "type":  "command",
+                                                            "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" StopFailure",
+                                                            "shell":  "powershell",
+                                                            "timeout":  5,
+                                                            "async":  true
+                                                        }
+                                                    ]
+                                      }
+                                  ],
+                  "SubagentStart":  [
+                                        {
+                                            "matcher":  "",
+                                            "hooks":  [
+                                                          {
+                                                              "type":  "command",
+                                                              "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" SubagentStart",
+                                                              "shell":  "powershell",
+                                                              "timeout":  5,
+                                                              "async":  true
+                                                          }
+                                                      ]
+                                        }
+                                    ],
+                  "SubagentStop":  [
+                                       {
+                                           "matcher":  "",
+                                           "hooks":  [
+                                                         {
+                                                             "type":  "command",
+                                                             "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" SubagentStop",
+                                                             "shell":  "powershell",
+                                                             "timeout":  5,
+                                                             "async":  true
+                                                         }
+                                                     ]
+                                       }
+                                   ],
+                  "UserPromptSubmit":  [
+                                           {
+                                               "matcher":  "",
+                                               "hooks":  [
+                                                             {
+                                                                 "type":  "command",
+                                                                 "command":  "\u0026 \"C:\\Program Files\\nodejs\\node.exe\" \"C:/Program Files/Clawd on Desk/resources/app.asar.unpacked/hooks/clawd-hook.js\" UserPromptSubmit",
+                                                                 "shell":  "powershell",
+                                                                 "timeout":  5,
+                                                                 "async":  true
+                                                             }
+                                                         ]
+                                           }
+                                       ]
+              },
+    "theme":  "dark",
+    "skipDangerousModePermissionPrompt":  true
+}

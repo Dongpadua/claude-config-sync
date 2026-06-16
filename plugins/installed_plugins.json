@@ -1,0 +1,75 @@
+{
+  "version": 2,
+  "plugins": {
+    "superpowers@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\Administrator\\.claude\\plugins\\cache\\claude-plugins-official\\superpowers\\5.1.0",
+        "version": "5.1.0",
+        "installedAt": "2026-06-11T08:52:26.800Z",
+        "lastUpdated": "2026-06-11T08:52:26.800Z",
+        "gitCommitSha": "6fd4507659784c351abbd2bc264c7162cfd386dc"
+      }
+    ],
+    "document-skills@anthropic-agent-skills": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\Administrator\\.claude\\plugins\\cache\\anthropic-agent-skills\\document-skills\\575462609294",
+        "version": "575462609294",
+        "installedAt": "2026-06-11T08:58:44.496Z",
+        "lastUpdated": "2026-06-11T08:58:44.496Z",
+        "gitCommitSha": "57546260929473d4e0d1c1bb75297be2fdfa1949"
+      }
+    ],
+    "frontend-design@duyet-claude-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\Administrator\\.claude\\plugins\\cache\\duyet-claude-plugins\\frontend-design\\1.3.0",
+        "version": "1.3.0",
+        "installedAt": "2026-06-11T08:59:23.354Z",
+        "lastUpdated": "2026-06-11T08:59:23.354Z",
+        "gitCommitSha": "00233427e8cae8e3afd878f40183354121f639a7"
+      }
+    ],
+    "code-review@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\Administrator\\.claude\\plugins\\cache\\claude-plugins-official\\code-review\\unknown",
+        "version": "unknown",
+        "installedAt": "2026-06-11T08:59:59.772Z",
+        "lastUpdated": "2026-06-16T03:20:16.779Z",
+        "gitCommitSha": "96468b2393c9af3b5e6215c2f3f9df80abb9270d"
+      }
+    ],
+    "claude-mem@thedotmack": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\Administrator\\.claude\\plugins\\cache\\thedotmack\\claude-mem\\13.6.1",
+        "version": "13.6.1",
+        "installedAt": "2026-06-11T09:35:51.019Z",
+        "lastUpdated": "2026-06-15T07:38:59.111Z",
+        "gitCommitSha": "b7479f818b09d5e871126027868036d4b6a212a7"
+      }
+    ],
+    "team-agents@duyet-claude-plugins": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\Administrator\\.claude\\plugins\\cache\\duyet-claude-plugins\\team-agents\\1.8.0",
+        "version": "1.8.0",
+        "installedAt": "2026-06-12T02:17:19.618Z",
+        "lastUpdated": "2026-06-12T02:17:19.618Z",
+        "gitCommitSha": "00233427e8cae8e3afd878f40183354121f639a7"
+      }
+    ],
+    "agent-browser-skill@agent-browser-skill": [
+      {
+        "scope": "user",
+        "installPath": "C:\\Users\\Administrator\\.claude\\plugins\\cache\\agent-browser-skill\\agent-browser-skill\\67f09decd4ae",
+        "version": "67f09decd4ae",
+        "installedAt": "2026-06-12T07:40:37.359Z",
+        "lastUpdated": "2026-06-12T07:40:37.359Z",
+        "gitCommitSha": "67f09decd4aea151f281442d311d86708695997b"
+      }
+    ]
+  }
+}

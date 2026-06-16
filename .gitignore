@@ -1,0 +1,39 @@
+# === Secrets (never commit) ===
+settings.json
+settings.local.json
+*.bak
+
+# === Session data (large, ephemeral, potentially sensitive) ===
+*.jsonl
+sessions/
+session-env/
+projects/
+
+# === Reclonable caches ===
+plugins/cache/
+plugins/marketplaces/
+
+# === Device-local state ===
+backups/
+telemetry/
+cache/
+file-history/
+shell-snapshots/
+ide/
+.last-cleanup
+.last-update-result.json
+.update.lock
+history.jsonl
+
+# === Nested git repos in skills ===
+skills/**/.git/
+
+# === OS junk ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Temp files ===
+*.tmp
+*.temp
+*~
