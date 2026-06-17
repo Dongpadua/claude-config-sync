@@ -4,3 +4,4 @@
 - [桌面输出规则](desktop-output-rule.md) — 多个文件建文件夹，单文件可直接放桌面
 - [新工具自动豁免](auto-allow-new-tools.md) — 新工具类型直接加 permissions.allow，不问
 - [精简写作](concise-writing.md) — 技能/错误日志/文档全部精简，最少字
+- [节日推文格式](wechat-festival-format.md) — 节日公众号文章：封面裁标题+黑字居中短句
