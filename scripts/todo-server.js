@@ -78,13 +78,35 @@ const server = http.createServer(async (req, res) => {
       title: body.title || 'Untitled',
       done: false,
       priority: body.priority || 'medium',
-      category: body.category || 'general',
       due: body.due || '',
       note: body.note || '',
     };
     data.tasks.push(task);
     writeTodos(data);
     return sendJSON(res, 200, task);
+  }
+
+  // API: POST /api/todos/add-batch — Claude dumps multiple tasks at once
+  if (url.pathname === '/api/todos/add-batch' && req.method === 'POST') {
+    const body = await parseBody(req);
+    const data = readTodos();
+    const items = body.items || [];
+    const added = [];
+    for (const item of items) {
+      if (!item || !item.trim()) continue;
+      const task = {
+        id: uid(),
+        title: item.trim(),
+        done: false,
+        priority: body.priority || 'medium',
+        due: '',
+        note: '',
+      };
+      data.tasks.push(task);
+      added.push(task);
+    }
+    if (added.length > 0) writeTodos(data);
+    return sendJSON(res, 200, { added, count: added.length });
   }
 
   // API: POST /api/todos/toggle
@@ -121,7 +143,6 @@ const server = http.createServer(async (req, res) => {
     if (task) {
       if (body.title !== undefined) task.title = body.title;
       if (body.priority !== undefined) task.priority = body.priority;
-      if (body.category !== undefined) task.category = body.category;
       if (body.due !== undefined) task.due = body.due;
       if (body.note !== undefined) task.note = body.note;
       writeTodos(data);

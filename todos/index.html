@@ -25,148 +25,85 @@ body {
   font-size: 13px;
   padding: 8px;
   user-select: none;
-  overflow-x: hidden;
 }
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-  padding-bottom: 8px;
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 10px; padding-bottom: 8px;
   border-bottom: 1px solid var(--border);
 }
-.header h1 {
-  font-size: 14px;
-  font-weight: 600;
-}
+.header h1 { font-size: 14px; font-weight: 600; }
 .stats { font-size: 11px; color: var(--muted); }
 .stats b { color: var(--accent); }
 
-.filters {
-  display: flex;
-  gap: 4px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
+.btn-row {
+  display: flex; gap: 4px; margin-bottom: 8px;
 }
-.filters button {
-  padding: 2px 8px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: transparent;
-  color: var(--muted);
-  font-size: 11px;
-  cursor: pointer;
-  transition: .15s;
+.btn-row button {
+  flex: 1; padding: 5px; border: 1px solid var(--border);
+  border-radius: 6px; background: var(--surface); color: var(--text);
+  font-size: 11px; cursor: pointer; transition: .15s;
 }
-.filters button.active { background: var(--accent); color: #111; border-color: var(--accent); }
+.btn-row button:hover { background: var(--border); }
+.btn-row button.primary { background: var(--accent); color: #111; border-color: var(--accent); font-weight: 600; }
 
 .task-list { list-style: none; min-height: 60px; }
 .task {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 4px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background .15s;
-  position: relative;
+  display: flex; align-items: center; gap: 6px;
+  padding: 5px 4px; border-radius: 6px;
+  cursor: pointer; transition: background .12s; position: relative;
 }
 .task:hover { background: var(--surface); }
 .task.done .title { text-decoration: line-through; color: var(--done); }
 .checkbox {
-  width: 16px; height: 16px;
-  border: 2px solid var(--border);
-  border-radius: 4px;
-  flex-shrink: 0;
+  width: 15px; height: 15px; border: 2px solid var(--border);
+  border-radius: 3px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  transition: .15s;
-  font-size: 10px;
+  font-size: 9px; transition: .12s;
 }
 .task.done .checkbox { background: var(--accent); border-color: var(--accent); }
-.priority-dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
+.pri-tag {
+  font-size: 10px; padding: 1px 5px; border-radius: 8px;
+  font-weight: 600; flex-shrink: 0; min-width: 28px; text-align: center;
 }
-.priority-dot.high { background: var(--high); }
-.priority-dot.medium { background: var(--medium); }
-.priority-dot.low { background: var(--low); }
-.title {
-  flex: 1;
-  font-size: 13px;
-  line-height: 1.3;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.cat-tag {
-  font-size: 10px;
-  padding: 1px 6px;
-  border-radius: 8px;
-  background: var(--border);
-  color: var(--muted);
-  flex-shrink: 0;
-}
+.pri-tag.high { background: rgba(243,139,168,.2); color: var(--high); }
+.pri-tag.medium { background: rgba(249,226,175,.15); color: var(--medium); }
+.pri-tag.low { background: rgba(166,173,200,.1); color: var(--low); }
+.title { flex: 1; font-size: 13px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .del-btn {
-  opacity: 0;
-  background: none;
-  border: none;
-  color: var(--high);
-  cursor: pointer;
-  font-size: 14px;
-  padding: 0 4px;
-  transition: opacity .15s;
-  flex-shrink: 0;
+  opacity: 0; background: none; border: none; color: var(--high);
+  cursor: pointer; font-size: 14px; padding: 0 3px; transition: opacity .12s; flex-shrink: 0;
 }
 .task:hover .del-btn { opacity: 1; }
 
 .add-bar {
-  margin-top: 10px;
-  display: flex;
-  gap: 6px;
+  margin-top: 8px; display: flex; gap: 4px;
 }
 .add-bar input {
-  flex: 1;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 6px 10px;
-  color: var(--text);
-  font-size: 13px;
-  outline: none;
+  flex: 1; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 6px; padding: 6px 8px; color: var(--text); font-size: 13px; outline: none;
 }
 .add-bar input:focus { border-color: var(--accent); }
 .add-bar select {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text);
-  padding: 4px;
-  font-size: 12px;
-  cursor: pointer;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--text); padding: 4px; font-size: 12px; cursor: pointer;
 }
 .add-bar button {
-  background: var(--accent);
-  color: #111;
-  border: none;
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
+  background: var(--accent); color: #111; border: none;
+  border-radius: 6px; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
 }
-
-.empty { text-align: center; color: var(--muted); padding: 20px 0; font-size: 12px; }
 
 .footer {
-  margin-top: 12px;
-  padding-top: 8px;
-  border-top: 1px solid var(--border);
-  font-size: 10px;
-  color: var(--muted);
-  display: flex;
-  justify-content: space-between;
+  margin-top: 10px; padding-top: 6px;
+  border-top: 1px solid var(--border); font-size: 10px; color: var(--muted);
+  display: flex; justify-content: space-between;
 }
+.toast {
+  position: fixed; bottom: 36px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #111; padding: 4px 12px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; opacity: 0; transition: opacity .2s;
+  pointer-events: none; z-index: 10;
+}
+.toast.show { opacity: 1; }
 </style>
 </head>
 <body>
@@ -176,29 +113,19 @@ body {
   <span class="stats"><b id="doneCount">0</b>/<span id="totalCount">0</span></span>
 </div>
 
-<div class="filters">
-  <button data-cat="all" class="active">全部</button>
-  <button data-cat="sync">同步</button>
-  <button data-cat="coding">编码</button>
-  <button data-cat="personal">个人</button>
-  <button data-cat="general">其他</button>
+<div class="btn-row">
+  <button class="primary" id="pasteBtn" title="从剪贴板批量添加">📋 粘贴添加</button>
+  <button id="clearDoneBtn" title="清除所有已完成">🗑 清除完成</button>
 </div>
 
 <ul class="task-list" id="taskList"></ul>
-<div class="empty" id="empty">暂无任务，在下方添加 👇</div>
 
 <div class="add-bar">
-  <input id="addInput" placeholder="新任务..." autofocus>
+  <input id="addInput" placeholder="写个任务..." autofocus>
   <select id="addPriority">
-    <option value="high">🔴</option>
-    <option value="medium" selected>🟡</option>
-    <option value="low">⚪</option>
-  </select>
-  <select id="addCategory">
-    <option value="general">一般</option>
-    <option value="sync">同步</option>
-    <option value="coding">编码</option>
-    <option value="personal">个人</option>
+    <option value="high">🔴 急</option>
+    <option value="medium" selected>🟡 中</option>
+    <option value="low">⚪ 缓</option>
   </select>
   <button id="addBtn">+</button>
 </div>
@@ -207,17 +134,15 @@ body {
   <span id="syncStatus">● 就绪</span>
   <span id="clock"></span>
 </div>
+<div class="toast" id="toast"></div>
 
 <script>
 const API = 'http://localhost:3899/api/todos';
 let todos = { tasks: [] };
-let filter = 'all';
 
 async function fetchTodos() {
   try {
-    const r = await fetch(API);
-    todos = await r.json();
-    render();
+    const r = await fetch(API); todos = await r.json(); render();
     document.getElementById('syncStatus').textContent = '● 已同步';
     document.getElementById('syncStatus').style.color = '#a6e3a1';
   } catch(e) {
@@ -226,25 +151,29 @@ async function fetchTodos() {
   }
 }
 
-async function addTodo() {
-  const input = document.getElementById('addInput');
-  const title = input.value.trim();
-  if (!title) return;
-  const priority = document.getElementById('addPriority').value;
-  const category = document.getElementById('addCategory').value;
+async function addTodo(title, priority) {
+  const t = title || document.getElementById('addInput').value.trim();
+  const p = priority || document.getElementById('addPriority').value;
+  if (!t) return;
   await fetch(API + '/add', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ title, priority, category })
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ title: t, priority: p })
   });
-  input.value = '';
+  if (!title) document.getElementById('addInput').value = '';
+  fetchTodos();
+}
+
+async function batchAdd(items, priority) {
+  await fetch(API + '/add-batch', {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ items, priority: priority || 'medium' })
+  });
   fetchTodos();
 }
 
 async function toggleTodo(id) {
   await fetch(API + '/toggle', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
+    method: 'POST', headers: {'Content-Type':'application/json'},
     body: JSON.stringify({ id })
   });
   fetchTodos();
@@ -252,41 +181,60 @@ async function toggleTodo(id) {
 
 async function deleteTodo(id) {
   await fetch(API + '/delete', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
+    method: 'POST', headers: {'Content-Type':'application/json'},
     body: JSON.stringify({ id })
   });
   fetchTodos();
 }
 
+async function clearDone() {
+  const doneIds = (todos.tasks || []).filter(t => t.done).map(t => t.id);
+  for (const id of doneIds) await deleteTodo(id);
+  toast(doneIds.length ? `已清除 ${doneIds.length} 项` : '没有已完成的任务');
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 1500);
+}
+
+// Paste from clipboard
+document.getElementById('pasteBtn').addEventListener('click', async () => {
+  try {
+    const text = await navigator.clipboard.readText();
+    if (!text.trim()) { toast('剪贴板为空'); return; }
+    const lines = text.split(/[\n\r]+/).map(s => s.replace(/^[-*•\s\d.]+\s*/, '').trim()).filter(Boolean);
+    if (!lines.length) { toast('未识别到有效文本'); return; }
+    await batchAdd(lines, document.getElementById('addPriority').value);
+    toast(`已添加 ${lines.length} 项`);
+  } catch(e) {
+    // Fallback: prompt for manual paste
+    const text = prompt('请粘贴待办内容（每行一项）：');
+    if (text && text.trim()) {
+      const lines = text.split(/[\n\r]+/).map(s => s.trim()).filter(Boolean);
+      if (lines.length) { await batchAdd(lines, document.getElementById('addPriority').value); toast(`已添加 ${lines.length} 项`); }
+    }
+  }
+});
+
+document.getElementById('clearDoneBtn').addEventListener('click', clearDone);
+
 function render() {
   const tasks = todos.tasks || [];
-  const filtered = filter === 'all' ? tasks : tasks.filter(t => t.category === filter);
   const doneTasks = tasks.filter(t => t.done);
-
   document.getElementById('doneCount').textContent = doneTasks.length;
   document.getElementById('totalCount').textContent = tasks.length;
 
   const list = document.getElementById('taskList');
-  const empty = document.getElementById('empty');
-
-  if (filtered.length === 0) {
-    list.innerHTML = '';
-    empty.style.display = 'block';
-    return;
-  }
-  empty.style.display = 'none';
-
-  // Sort: undone first, then by priority
   const priOrder = { high:0, medium:1, low:2 };
-  filtered.sort((a,b) => a.done - b.done || priOrder[a.priority] - priOrder[b.priority]);
+  const sorted = [...tasks].sort((a,b) => a.done - b.done || priOrder[a.priority] - priOrder[b.priority]);
 
-  list.innerHTML = filtered.map(t => `
+  list.innerHTML = sorted.map(t => `
     <li class="task ${t.done ? 'done' : ''}" data-id="${t.id}">
       <div class="checkbox" onclick="toggleTodo('${t.id}')">${t.done ? '✓' : ''}</div>
-      <div class="priority-dot ${t.priority}"></div>
+      <span class="pri-tag ${t.priority}">${t.priority==='high'?'急':t.priority==='medium'?'中':'缓'}</span>
       <span class="title" onclick="toggleTodo('${t.id}')">${esc(t.title)}</span>
-      <span class="cat-tag">${t.category}</span>
       <button class="del-btn" onclick="event.stopPropagation();deleteTodo('${t.id}')" title="删除">×</button>
     </li>
   `).join('');
@@ -294,31 +242,14 @@ function render() {
 
 function esc(s) { return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-// Filters
-document.querySelectorAll('.filters button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    filter = btn.dataset.cat;
-    render();
-  });
-});
+document.getElementById('addBtn').addEventListener('click', () => addTodo());
+document.getElementById('addInput').addEventListener('keydown', e => { if (e.key === 'Enter') addTodo(); });
 
-// Add
-document.getElementById('addBtn').addEventListener('click', addTodo);
-document.getElementById('addInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') addTodo();
-});
-
-// Clock
 function tick() {
-  const now = new Date();
-  document.getElementById('clock').textContent = now.toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit'});
+  document.getElementById('clock').textContent = new Date().toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit'});
 }
-tick();
-setInterval(tick, 30000);
+tick(); setInterval(tick, 30000);
 
-// Poll for changes
 fetchTodos();
 setInterval(fetchTodos, 3000);
 </script>
