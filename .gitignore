@@ -2,6 +2,7 @@
 settings.json
 settings.local.json
 *.bak
+**/gateway-keys.json
 
 # === Session data (large, ephemeral, potentially sensitive) ===
 *.jsonl
