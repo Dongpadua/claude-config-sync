@@ -103,7 +103,7 @@ if (Test-Path "$RepoDir\scripts") {
 }
 
 # Phase 7: Reinstall plugins
-Write-Host "[7/8] Reinstalling plugins..." -ForegroundColor Yellow
+Write-Host "[7/9] Reinstalling plugins..." -ForegroundColor Yellow
 if (Get-Command "claude" -ErrorAction SilentlyContinue) {
     $plugins = Get-Content "$RepoDir\plugins\installed_plugins.json" -Raw | ConvertFrom-Json
     foreach ($plugin in $plugins) {
@@ -114,8 +114,17 @@ if (Get-Command "claude" -ErrorAction SilentlyContinue) {
     Write-Host "  SKIP: 'claude' command not found. Install Claude Code first." -ForegroundColor DarkYellow
 }
 
+# Phase 8: Install essential apps (Clawd on Desk + DeepSeek Monitor)
+Write-Host "[8/9] Installing essential apps..." -ForegroundColor Yellow
+$installAppsScript = "$RepoDir\scripts\install-apps.ps1"
+if (Test-Path $installAppsScript) {
+    & powershell -ExecutionPolicy Bypass -File $installAppsScript
+} else {
+    Write-Host "  WARNING: install-apps.ps1 not found, skipping." -ForegroundColor DarkYellow
+}
+
 # Done
-Write-Host "`n[8/8] Done!" -ForegroundColor Green
+Write-Host "`n[9/9] Done!" -ForegroundColor Green
 Write-Host "=== Setup Complete ===" -ForegroundColor Cyan
 Write-Host "IMPORTANT: Restart your terminal (or log out/in) for env vars to take effect."
 Write-Host "Then launch Claude Code — it will auto-login via DeepSeek.`n"
