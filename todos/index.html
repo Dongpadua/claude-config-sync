@@ -10,96 +10,112 @@
   --surface: #252536;
   --border: #333348;
   --text: #cdd6f4;
-  --muted: #6c7086;
-  --high: #f38ba8;
-  --medium: #f9e2af;
-  --low: #a6adc8;
+  --muted: #585b70;
+  --pri-high: #f38ba8;
+  --pri-med: #f9e2af;
+  --pri-low: #a6adc8;
   --accent: #89b4fa;
   --done: #45475a;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
-  font-size: 13px;
-  padding: 8px;
+  font-size: 12px;
+  padding: 6px 6px 8px 6px;
   user-select: none;
+  line-height: 1.4;
 }
+
+/* ── Header row: title + sync + stats all inline ── */
 .header {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 10px; padding-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 6px; padding-bottom: 4px;
   border-bottom: 1px solid var(--border);
 }
-.header h1 { font-size: 14px; font-weight: 600; }
-.stats { font-size: 11px; color: var(--muted); }
-.stats b { color: var(--accent); }
-
-.btn-row {
-  display: flex; gap: 4px; margin-bottom: 8px;
+.header h1 { font-size: 13px; font-weight: 600; white-space: nowrap; }
+.sync-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  background: var(--muted); transition: background .3s;
 }
-.btn-row button {
-  flex: 1; padding: 5px; border: 1px solid var(--border);
-  border-radius: 6px; background: var(--surface); color: var(--text);
-  font-size: 11px; cursor: pointer; transition: .15s;
+.sync-dot.online { background: #a6e3a1; }
+.sync-dot.offline { background: #f38ba8; }
+.stats {
+  margin-left: auto; font-size: 11px; color: var(--muted);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
 }
-.btn-row button:hover { background: var(--border); }
-.btn-row button.primary { background: var(--accent); color: #111; border-color: var(--accent); font-weight: 600; }
+.stats b { color: var(--accent); font-weight: 600; }
 
-.task-list { list-style: none; min-height: 60px; }
+/* ── Action row ── */
+.actions {
+  display: flex; gap: 3px; margin-bottom: 6px;
+}
+.actions button {
+  flex: 1; padding: 3px 6px; border: 1px solid var(--border);
+  border-radius: 4px; background: transparent; color: var(--muted);
+  font-size: 10px; cursor: pointer; transition: .12s;
+  font-weight: 500;
+}
+.actions button:hover { background: var(--surface); color: var(--text); }
+.actions button.primary { border-color: var(--accent); color: var(--accent); }
+.actions button.primary:hover { background: rgba(137,180,250,.1); }
+
+/* ── Task list ── */
+.task-list { list-style: none; min-height: 40px; }
 .task {
-  display: flex; align-items: center; gap: 6px;
-  padding: 5px 4px; border-radius: 6px;
-  cursor: pointer; transition: background .12s; position: relative;
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 2px; border-radius: 4px;
+  cursor: pointer; transition: background .1s; position: relative;
 }
 .task:hover { background: var(--surface); }
 .task.done .title { text-decoration: line-through; color: var(--done); }
-.checkbox {
-  width: 15px; height: 15px; border: 2px solid var(--border);
+/* Priority dot — color only, no text */
+.pri {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+.pri.high   { background: var(--pri-high); }
+.pri.medium { background: var(--pri-med); }
+.pri.low    { background: var(--pri-low); }
+/* Checkbox */
+.cb {
+  width: 14px; height: 14px; border: 1.5px solid var(--border);
   border-radius: 3px; flex-shrink: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 9px; transition: .12s;
+  font-size: 8px; transition: .1s; color: #111;
 }
-.task.done .checkbox { background: var(--accent); border-color: var(--accent); }
-.pri-tag {
-  font-size: 10px; padding: 1px 5px; border-radius: 8px;
-  font-weight: 600; flex-shrink: 0; min-width: 28px; text-align: center;
-}
-.pri-tag.high { background: rgba(243,139,168,.2); color: var(--high); }
-.pri-tag.medium { background: rgba(249,226,175,.15); color: var(--medium); }
-.pri-tag.low { background: rgba(166,173,200,.1); color: var(--low); }
-.title { flex: 1; font-size: 13px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.task.done .cb { background: var(--accent); border-color: var(--accent); }
+.title { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .del-btn {
-  opacity: 0; background: none; border: none; color: var(--high);
-  cursor: pointer; font-size: 14px; padding: 0 3px; transition: opacity .12s; flex-shrink: 0;
+  opacity: 0; background: none; border: none; color: var(--pri-high);
+  cursor: pointer; font-size: 13px; line-height: 1; padding: 0 2px;
+  transition: opacity .1s; flex-shrink: 0;
 }
 .task:hover .del-btn { opacity: 1; }
 
+/* ── Add bar ── */
 .add-bar {
-  margin-top: 8px; display: flex; gap: 4px;
+  display: flex; gap: 3px; margin-top: 6px;
 }
 .add-bar input {
   flex: 1; background: var(--surface); border: 1px solid var(--border);
-  border-radius: 6px; padding: 6px 8px; color: var(--text); font-size: 13px; outline: none;
+  border-radius: 4px; padding: 5px 6px; color: var(--text); font-size: 12px; outline: none;
 }
 .add-bar input:focus { border-color: var(--accent); }
 .add-bar select {
   background: var(--surface); border: 1px solid var(--border);
-  border-radius: 6px; color: var(--text); padding: 4px; font-size: 12px; cursor: pointer;
+  border-radius: 4px; color: var(--text); padding: 2px 3px; font-size: 11px; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
 }
 .add-bar button {
   background: var(--accent); color: #111; border: none;
-  border-radius: 6px; padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+  border-radius: 4px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer;
 }
 
-.footer {
-  margin-top: 10px; padding-top: 6px;
-  border-top: 1px solid var(--border); font-size: 10px; color: var(--muted);
-  display: flex; justify-content: space-between;
-}
+/* ── Toast ── */
 .toast {
-  position: fixed; bottom: 36px; left: 50%; transform: translateX(-50%);
-  background: var(--accent); color: #111; padding: 4px 12px; border-radius: 6px;
+  position: fixed; bottom: 8px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #111; padding: 3px 10px; border-radius: 4px;
   font-size: 11px; font-weight: 600; opacity: 0; transition: opacity .2s;
   pointer-events: none; z-index: 10;
 }
@@ -110,56 +126,55 @@ body {
 
 <div class="header">
   <h1>📋 待办</h1>
-  <span class="stats"><b id="doneCount">0</b>/<span id="totalCount">0</span></span>
+  <span class="sync-dot" id="syncDot" title="同步状态"></span>
+  <span class="stats"><b id="doneCount">—</b>/<span id="totalCount">—</span></span>
 </div>
 
-<div class="btn-row">
-  <button class="primary" id="pasteBtn" title="从剪贴板批量添加">📋 粘贴添加</button>
-  <button id="clearDoneBtn" title="清除所有已完成">🗑 清除完成</button>
+<div class="actions">
+  <button class="primary" id="pasteBtn">📋 粘贴添加</button>
+  <button id="clearDoneBtn">清除已完成</button>
 </div>
 
 <ul class="task-list" id="taskList"></ul>
 
 <div class="add-bar">
-  <input id="addInput" placeholder="写个任务..." autofocus>
+  <input id="addInput" placeholder="新任务…" autofocus>
   <select id="addPriority">
-    <option value="high">🔴 急</option>
-    <option value="medium" selected>🟡 中</option>
-    <option value="low">⚪ 缓</option>
+    <option value="high">🔴</option>
+    <option value="medium" selected>🟡</option>
+    <option value="low">⚪</option>
   </select>
   <button id="addBtn">+</button>
 </div>
 
-<div class="footer">
-  <span id="syncStatus">● 就绪</span>
-  <span id="clock"></span>
-</div>
 <div class="toast" id="toast"></div>
 
 <script>
 const API = 'http://localhost:3899/api/todos';
 let todos = { tasks: [] };
 
+function $(id) { return document.getElementById(id); }
+
 async function fetchTodos() {
   try {
     const r = await fetch(API); todos = await r.json(); render();
-    document.getElementById('syncStatus').textContent = '● 已同步';
-    document.getElementById('syncStatus').style.color = '#a6e3a1';
+    $('syncDot').classList.add('online'); $('syncDot').classList.remove('offline');
+    $('syncDot').title = '已同步';
   } catch(e) {
-    document.getElementById('syncStatus').textContent = '● 离线';
-    document.getElementById('syncStatus').style.color = '#f38ba8';
+    $('syncDot').classList.add('offline'); $('syncDot').classList.remove('online');
+    $('syncDot').title = '离线';
   }
 }
 
 async function addTodo(title, priority) {
-  const t = title || document.getElementById('addInput').value.trim();
-  const p = priority || document.getElementById('addPriority').value;
+  const t = title || $('addInput').value.trim();
+  const p = priority || $('addPriority').value;
   if (!t) return;
   await fetch(API + '/add', {
     method: 'POST', headers: {'Content-Type':'application/json'},
     body: JSON.stringify({ title: t, priority: p })
   });
-  if (!title) document.getElementById('addInput').value = '';
+  if (!title) $('addInput').value = '';
   fetchTodos();
 }
 
@@ -173,16 +188,14 @@ async function batchAdd(items, priority) {
 
 async function toggleTodo(id) {
   await fetch(API + '/toggle', {
-    method: 'POST', headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ id })
+    method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ id })
   });
   fetchTodos();
 }
 
 async function deleteTodo(id) {
   await fetch(API + '/delete', {
-    method: 'POST', headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ id })
+    method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ id })
   });
   fetchTodos();
 }
@@ -190,65 +203,58 @@ async function deleteTodo(id) {
 async function clearDone() {
   const doneIds = (todos.tasks || []).filter(t => t.done).map(t => t.id);
   for (const id of doneIds) await deleteTodo(id);
-  toast(doneIds.length ? `已清除 ${doneIds.length} 项` : '没有已完成的任务');
+  toast(doneIds.length ? `已清除 ${doneIds.length} 项` : '没有已完成的');
 }
 
 function toast(msg) {
-  const el = document.getElementById('toast');
+  const el = $('toast');
   el.textContent = msg; el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 1500);
+  setTimeout(() => el.classList.remove('show'), 1400);
 }
 
-// Paste from clipboard
-document.getElementById('pasteBtn').addEventListener('click', async () => {
+// ── Paste from clipboard ──
+$('pasteBtn').addEventListener('click', async () => {
   try {
     const text = await navigator.clipboard.readText();
     if (!text.trim()) { toast('剪贴板为空'); return; }
     const lines = text.split(/[\n\r]+/).map(s => s.replace(/^[-*•\s\d.]+\s*/, '').trim()).filter(Boolean);
-    if (!lines.length) { toast('未识别到有效文本'); return; }
-    await batchAdd(lines, document.getElementById('addPriority').value);
+    if (!lines.length) { toast('未识别到有效行'); return; }
+    await batchAdd(lines, $('addPriority').value);
     toast(`已添加 ${lines.length} 项`);
-  } catch(e) {
-    // Fallback: prompt for manual paste
-    const text = prompt('请粘贴待办内容（每行一项）：');
+  } catch {
+    const text = prompt('请粘贴内容（每行一项）：');
     if (text && text.trim()) {
       const lines = text.split(/[\n\r]+/).map(s => s.trim()).filter(Boolean);
-      if (lines.length) { await batchAdd(lines, document.getElementById('addPriority').value); toast(`已添加 ${lines.length} 项`); }
+      if (lines.length) { await batchAdd(lines, $('addPriority').value); toast(`已添加 ${lines.length} 项`); }
     }
   }
 });
 
-document.getElementById('clearDoneBtn').addEventListener('click', clearDone);
+$('clearDoneBtn').addEventListener('click', clearDone);
 
 function render() {
   const tasks = todos.tasks || [];
-  const doneTasks = tasks.filter(t => t.done);
-  document.getElementById('doneCount').textContent = doneTasks.length;
-  document.getElementById('totalCount').textContent = tasks.length;
+  const doneCount = tasks.filter(t => t.done).length;
+  $('doneCount').textContent = doneCount;
+  $('totalCount').textContent = tasks.length;
 
-  const list = document.getElementById('taskList');
   const priOrder = { high:0, medium:1, low:2 };
   const sorted = [...tasks].sort((a,b) => a.done - b.done || priOrder[a.priority] - priOrder[b.priority]);
 
-  list.innerHTML = sorted.map(t => `
-    <li class="task ${t.done ? 'done' : ''}" data-id="${t.id}">
-      <div class="checkbox" onclick="toggleTodo('${t.id}')">${t.done ? '✓' : ''}</div>
-      <span class="pri-tag ${t.priority}">${t.priority==='high'?'急':t.priority==='medium'?'中':'缓'}</span>
+  $('taskList').innerHTML = sorted.map(t => `
+    <li class="task ${t.done ? 'done' : ''}">
+      <span class="pri ${t.priority}" title="${t.priority==='high'?'紧急':t.priority==='medium'?'中等':'低优先'}"></span>
+      <div class="cb" onclick="toggleTodo('${t.id}')">${t.done ? '✓' : ''}</div>
       <span class="title" onclick="toggleTodo('${t.id}')">${esc(t.title)}</span>
-      <button class="del-btn" onclick="event.stopPropagation();deleteTodo('${t.id}')" title="删除">×</button>
+      <button class="del-btn" onclick="event.stopPropagation();deleteTodo('${t.id}')">×</button>
     </li>
   `).join('');
 }
 
 function esc(s) { return s.replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-document.getElementById('addBtn').addEventListener('click', () => addTodo());
-document.getElementById('addInput').addEventListener('keydown', e => { if (e.key === 'Enter') addTodo(); });
-
-function tick() {
-  document.getElementById('clock').textContent = new Date().toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit'});
-}
-tick(); setInterval(tick, 30000);
+$('addBtn').addEventListener('click', () => addTodo());
+$('addInput').addEventListener('keydown', e => { if (e.key === 'Enter') addTodo(); });
 
 fetchTodos();
 setInterval(fetchTodos, 3000);
