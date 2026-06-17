@@ -28,8 +28,15 @@ if (-not $SkipKeyPrompt) {
     $kimiKey = Read-Host "Kimi API key (press Enter to skip)"
 }
 
-# Phase 2: Write settings.json
-Write-Host "`n[1/7] Creating settings.json..." -ForegroundColor Yellow
+# Phase 2: Set system-level env vars (so Claude Code skips login on first launch)
+Write-Host "`n[1/8] Setting environment variables..." -ForegroundColor Yellow
+[Environment]::SetEnvironmentVariable("ANTHROPIC_AUTH_TOKEN", $deepseekKey, "User")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_BASE_URL", "https://api.deepseek.com/anthropic", "User")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_MODEL", "deepseek-v4-pro", "User")
+Write-Host "  Set ANTHROPIC_AUTH_TOKEN, ANTHROPIC_BASE_URL, ANTHROPIC_MODEL at user level"
+
+# Phase 3: Write settings.json
+Write-Host "[2/8] Creating settings.json..." -ForegroundColor Yellow
 $template = Get-Content "$RepoDir\settings.template.json" -Raw | ConvertFrom-Json
 $template.env.ANTHROPIC_AUTH_TOKEN = $deepseekKey
 $template.env.GEMINI_KEY = if ($geminiKey) { $geminiKey } else { "YOUR_GEMINI_KEY_HERE" }
@@ -40,12 +47,12 @@ New-Item -ItemType Directory -Force -Path $ClaudeDir | Out-Null
 $template | ConvertTo-Json -Depth 10 | Set-Content "$ClaudeDir\settings.json" -Encoding UTF8
 
 # Phase 3: Copy CLAUDE.md + config
-Write-Host "[2/7] Copying CLAUDE.md + config..." -ForegroundColor Yellow
+Write-Host "[3/8] Copying CLAUDE.md + config..." -ForegroundColor Yellow
 Copy-Item "$RepoDir\CLAUDE.md" "$ClaudeDir\" -Force
 if (Test-Path "$RepoDir\config.json") { Copy-Item "$RepoDir\config.json" "$ClaudeDir\" -Force }
 
-# Phase 4: Deploy skills
-Write-Host "[3/7] Deploying skills..." -ForegroundColor Yellow
+# Phase 5: Deploy skills
+Write-Host "[4/8] Deploying skills..." -ForegroundColor Yellow
 Robocopy "$RepoDir\skills" "$ClaudeDir\skills" /E /XO /XF "*.symlink" /NJH /NJS /NP | Out-Null
 
 # Handle symlink skills
@@ -70,7 +77,7 @@ Get-ChildItem "$RepoDir\skills\*.symlink" -ErrorAction SilentlyContinue | ForEac
 }
 
 # Phase 5: Restore memory
-Write-Host "[4/7] Restoring memory files..." -ForegroundColor Yellow
+Write-Host "[5/8] Restoring memory files..." -ForegroundColor Yellow
 Get-ChildItem "$RepoDir\memory" -Directory -ErrorAction SilentlyContinue | ForEach-Object {
     $projectName = $_.Name
     $projectMemoryDir = "$ClaudeDir\projects\$projectName\memory"
@@ -80,7 +87,7 @@ Get-ChildItem "$RepoDir\memory" -Directory -ErrorAction SilentlyContinue | ForEa
 }
 
 # Phase 6: Copy plugins/connect/scripts
-Write-Host "[5/7] Copying plugins/connect/scripts..." -ForegroundColor Yellow
+Write-Host "[6/8] Copying plugins/connect/scripts..." -ForegroundColor Yellow
 if (Test-Path "$RepoDir\plugins\installed_plugins.json") {
     New-Item -ItemType Directory -Force -Path "$ClaudeDir\plugins" | Out-Null
     Copy-Item "$RepoDir\plugins\installed_plugins.json" "$ClaudeDir\plugins\" -Force
@@ -96,7 +103,7 @@ if (Test-Path "$RepoDir\scripts") {
 }
 
 # Phase 7: Reinstall plugins
-Write-Host "[6/7] Reinstalling plugins..." -ForegroundColor Yellow
+Write-Host "[7/8] Reinstalling plugins..." -ForegroundColor Yellow
 if (Get-Command "claude" -ErrorAction SilentlyContinue) {
     $plugins = Get-Content "$RepoDir\plugins\installed_plugins.json" -Raw | ConvertFrom-Json
     foreach ($plugin in $plugins) {
@@ -108,6 +115,7 @@ if (Get-Command "claude" -ErrorAction SilentlyContinue) {
 }
 
 # Done
-Write-Host "`n[7/7] Done!" -ForegroundColor Green
+Write-Host "`n[8/8] Done!" -ForegroundColor Green
 Write-Host "=== Setup Complete ===" -ForegroundColor Cyan
-Write-Host "Restart Claude Code for changes to take effect.`n"
+Write-Host "IMPORTANT: Restart your terminal (or log out/in) for env vars to take effect."
+Write-Host "Then launch Claude Code — it will auto-login via DeepSeek.`n"
