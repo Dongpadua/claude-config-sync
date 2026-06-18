@@ -1,7 +1,18 @@
-- [cc-connect 接入 Telegram 完整配置](cc-connect-telegram-config.md) — Telegram Bot 对接 Claude Code，清理思考输出和页脚
-- [待办列表](todo-list.md) — 持久待办，跨会话保留，随时添加和查看
-- [技能问题日志](skill-debug-log.md) — 使用任何技能前先查此记录，避免重复踩坑
-- [桌面输出规则](desktop-output-rule.md) — 多个文件建文件夹，单文件可直接放桌面
-- [新工具自动豁免](auto-allow-new-tools.md) — 新工具类型直接加 permissions.allow，不问
-- [精简写作](concise-writing.md) — 技能/错误日志/文档全部精简，最少字
-- [节日推文格式](wechat-festival-format.md) — 节日公众号文章：封面裁标题+黑字居中短句
+# Memory Index
+
+跨会话持久化的记忆文件索引。
+
+## 目录
+
+| 文件 | 类型 | 描述 |
+|------|------|------|
+| [[session-rules]] | session-summary | 2026-06-18 会话总结 — VBS挂机/Clawd修复/权限根因/零交互规则/VBS踩坑 |
+| [[no-confirmation-ever]] | feedback | 绝不使用 ExitPlanMode 或任何确认步骤 — 直接执行所有操作 |
+| [[desktop-pet-clawd-sync]] | feedback | 桌面宠物 Clawd on Desk v6.5 存在同步/显示问题，需关注 |
+| [[git-push-strategy]] | feedback | 配置同步仓库的推送策略 — 只在会话结束时推送 |
+| [[todo-integration]] | project | 如何将对话中的内容添加到可同步待办侧边栏 |
+| [[git-proxy-troubleshooting]] | reference | Windows下git走代理推送GitHub的完整排坑指南 |
+
+## 最后更新
+
+2026-06-18 — 新增 no-confirmation-ever、desktop-pet-clawd-sync；更新 session-rules 为 session-summary
