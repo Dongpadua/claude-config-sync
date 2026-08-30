@@ -1,4 +1,4 @@
-# install-apps.ps1 — 新电脑安装必备应用（先检查再下载）
+﻿# install-apps.ps1 — 新电脑安装必备应用（先检查再下载）
 # 用法: powershell -ExecutionPolicy Bypass -File install-apps.ps1
 
 $ErrorActionPreference = "Stop"
@@ -14,10 +14,11 @@ $apps = @(
         PrefsPath  = "$env:APPDATA\clawd-on-desk\clawd-prefs.json"
     },
     @{
-        Name       = "DeepSeek Monitor Windows"
-        ExePath    = "D:\DeepSeekMonitorWindows\app.exe"
-        Installer  = "$DownloadDir\DeepSeekMonitorWindows-Setup-x64.exe"
-        Url        = "https://github.com/Joyi-code/DeepSeekMonitorWindows/releases/latest/download/DeepSeekMonitorWindows_x64-setup.exe"
+        Name        = "DeepSeek Monitor Windows"
+        ExePath     = "D:\DeepSeekMonitorWindows\app.exe"
+        Installer   = "$DownloadDir\DeepSeekMonitorWindows-Setup-x64.exe"
+        Url         = "https://github.com/Joyi-code/DeepSeekMonitorWindows/releases/latest/download/DeepSeekMonitorWindows_1.1.0_x64-setup.exe"
+        InstallArgs = "/S /D=D:\DeepSeekMonitorWindows"
     }
 )
 
@@ -58,7 +59,11 @@ foreach ($app in $apps) {
     # 3. 静默安装
     Write-Host "  Installing..." -ForegroundColor Gray
     try {
-        Start-Process -FilePath $app.Installer -ArgumentList "/S" -Wait -NoNewWindow
+        $installArgs = "/S"
+        if ($app.InstallArgs) {
+            $installArgs = $app.InstallArgs
+        }
+        Start-Process -FilePath $app.Installer -ArgumentList $installArgs -Wait -NoNewWindow
         Start-Sleep -Seconds 3
         if (Test-Path $app.ExePath) {
             Write-Host "  Installed successfully!" -ForegroundColor Green
