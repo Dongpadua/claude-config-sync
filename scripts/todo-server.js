@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = process.argv[2] || 3899;
-const REPO_DIR = process.env.TODO_REPO || path.join(process.env.USERPROFILE, '.claude-config-sync');
+const REPO_DIR = process.env.TODO_REPO || 'D:/claude/claude-config-sync';
 const DATA_FILE = path.join(REPO_DIR, 'todos', 'todo.json');
 const HTML_FILE = path.join(REPO_DIR, 'todos', 'index.html');
 

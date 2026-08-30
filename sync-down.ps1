@@ -1,7 +1,7 @@
 # sync-down.ps1 — Pull latest config changes into .claude (preserves local keys)
-# Usage: cd ~/.claude-config-sync; git pull; .\sync-down.ps1
+# Usage: cd D:\claude\claude-config-sync; git pull; .\sync-down.ps1
 $ErrorActionPreference = "Stop"
-$RepoDir = "$env:USERPROFILE\.claude-config-sync"
+$RepoDir = "D:\claude\claude-config-sync"
 $ClaudeDir = "$env:USERPROFILE\.claude"
 
 Write-Host "=== Claude Config Sync — PULL ===" -ForegroundColor Cyan

@@ -6,7 +6,7 @@ description: Gemini 生图全流程：打开→提示词→下载完整尺寸→
 # Gemini Poster
 
 ## 前置
-1. Chrome 调试模式（端口9222）：运行 `~/.claude-config-sync/scripts/gemini.ps1`
+1. Chrome 调试模式（端口9222）：运行 `D:\claude\claude-config-sync\scripts/gemini.ps1`
 2. Gemini 已登录
 
 ## 流程

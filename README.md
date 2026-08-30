@@ -27,7 +27,7 @@ claude --version    # Claude Code 需先装好
 ### 2. 克隆同步仓库
 
 ```powershell
-git clone https://github.com/Dongpadua/claude-config-sync.git "$env:USERPROFILE\.claude-config-sync"
+git clone https://github.com/Dongpadua/claude-config-sync.git "D:\claude\claude-config-sync"
 ```
 
 如果提示登录，输入 GitHub 账号 `Dongpadua` 和密码/token。
@@ -35,7 +35,7 @@ git clone https://github.com/Dongpadua/claude-config-sync.git "$env:USERPROFILE\
 ### 3. 一键部署
 
 ```powershell
-cd "$env:USERPROFILE\.claude-config-sync"
+cd "D:\claude\claude-config-sync"
 .\setup.ps1
 ```
 
@@ -55,7 +55,7 @@ cd "$env:USERPROFILE\.claude-config-sync"
 **在任何一台电脑上**，改完技能、设置、记忆文件后：
 
 ```powershell
-cd "$env:USERPROFILE\.claude-config-sync"
+cd "D:\claude\claude-config-sync"
 .\push.ps1
 ```
 
@@ -75,7 +75,7 @@ cd "$env:USERPROFILE\.claude-config-sync"
 > ```powershell
 > # 在 PowerShell 里运行：notepad $PROFILE
 > # 粘贴下面这行，保存：
-> function sync-claude { Push-Location "$env:USERPROFILE\.claude-config-sync"; .\push.ps1; Pop-Location }
+> function sync-claude { Push-Location "D:\claude\claude-config-sync"; .\push.ps1; Pop-Location }
 > ```
 > 以后直接敲 `sync-claude` 即可推送。
 
@@ -86,7 +86,7 @@ cd "$env:USERPROFILE\.claude-config-sync"
 当 A 电脑推送后，B 电脑想同步最新配置：
 
 ```powershell
-cd "$env:USERPROFILE\.claude-config-sync"
+cd "D:\claude\claude-config-sync"
 git pull
 .\sync-down.ps1
 ```
@@ -123,11 +123,11 @@ git pull
 
 | 操作 | 命令 |
 |------|------|
-| **新电脑初始化** | `git clone ...` → `cd ~/.claude-config-sync` → `.\setup.ps1` |
-| **推送更新** | `cd ~/.claude-config-sync` → `.\push.ps1` |
-| **拉取更新** | `cd ~/.claude-config-sync` → `git pull` → `.\sync-down.ps1` |
-| **查看变更历史** | `cd ~/.claude-config-sync` → `git log --oneline -10` |
-| **回滚到某次推送** | `cd ~/.claude-config-sync` → `git log` 找 commit → `git checkout <commit> -- .` → `.\sync-down.ps1` |
+| **新电脑初始化** | `git clone ...` → `cd D:\claude\claude-config-sync` → `.\setup.ps1` |
+| **推送更新** | `cd D:\claude\claude-config-sync` → `.\push.ps1` |
+| **拉取更新** | `cd D:\claude\claude-config-sync` → `git pull` → `.\sync-down.ps1` |
+| **查看变更历史** | `cd D:\claude\claude-config-sync` → `git log --oneline -10` |
+| **回滚到某次推送** | `cd D:\claude\claude-config-sync` → `git log` 找 commit → `git checkout <commit> -- .` → `.\sync-down.ps1` |
 
 ---
 

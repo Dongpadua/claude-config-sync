@@ -1,9 +1,9 @@
 # setup.ps1 — Initialize Claude Code config on a NEW device
-# Usage: git clone <repo> ~/.claude-config-sync; cd ~/.claude-config-sync; .\setup.ps1
+# Usage: git clone <repo> D:\claude\claude-config-sync; cd D:\claude\claude-config-sync; .\setup.ps1
 param([switch]$SkipKeyPrompt)
 
 $ErrorActionPreference = "Stop"
-$RepoDir = "$env:USERPROFILE\.claude-config-sync"
+$RepoDir = "D:\claude\claude-config-sync"
 $ClaudeDir = "$env:USERPROFILE\.claude"
 
 Write-Host "`n=== Claude Config Sync — SETUP ===`n" -ForegroundColor Cyan

@@ -21,7 +21,7 @@ if (-not $gw) {
 $todo = netstat -ano 2>$null | Select-String "127.0.0.1:3899"
 if (-not $todo) {
     Write-Host "$(Get-Date -Format 'HH:mm:ss') Todo-server not running, starting..."
-    Start-Process node -ArgumentList "$env:USERPROFILE\.claude-config-sync\scripts\todo-server.js" -WindowStyle Hidden
+    Start-Process node -ArgumentList "D:\claude\claude-config-sync\scripts\todo-server.js" -WindowStyle Hidden
 } else {
     Write-Host "$(Get-Date -Format 'HH:mm:ss') Todo-server OK (port 3899)"
 }

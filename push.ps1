@@ -1,7 +1,7 @@
 # push.ps1 — Push current Claude Code config to sync repo
-# Usage: cd ~/.claude-config-sync; .\push.ps1
+# Usage: cd D:\claude\claude-config-sync; .\push.ps1
 $ErrorActionPreference = "Stop"
-$RepoDir = "$env:USERPROFILE\.claude-config-sync"
+$RepoDir = "D:\claude\claude-config-sync"
 $ClaudeDir = "$env:USERPROFILE\.claude"
 
 Write-Host "=== Claude Config Sync — PUSH ===" -ForegroundColor Cyan
