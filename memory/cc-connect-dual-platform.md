@@ -71,7 +71,7 @@ mode = "default"
 
 [[projects.agent.providers]]
 name = "deepseek"
-api_key = "sk-a29ac74fc47f4f3795fc2c6ea233278c"
+api_key = "sk-YOUR_DEEPSEEK_KEY_HERE"
 base_url = "https://api.deepseek.com/anthropic"
 model = "deepseek-v4-pro"
 thinking = "disabled"
@@ -80,7 +80,7 @@ thinking = "disabled"
 type = "weixin"
 
 [projects.platforms.options]
-token = "805686161b6b@im.bot:060000bb5b070628b9def62ed341d06c30c1b6"
+token = "805686161b6b@im.bot:YOUR_ILINK_TOKEN_HERE"
 base_url = "https://ilinkai.weixin.qq.com"
 account_id = "805686161b6b@im.bot"
 ```
@@ -140,7 +140,7 @@ mode = "default"
 
 [[projects.agent.providers]]
 name = "deepseek"
-api_key = "sk-a29ac74fc47f4f3795fc2c6ea233278c"
+api_key = "sk-YOUR_DEEPSEEK_KEY_HERE"
 base_url = "https://api.deepseek.com/anthropic"
 model = "deepseek-v4-pro"
 thinking = "disabled"
